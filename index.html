@@ -40,7 +40,6 @@
       font-weight: bold;
       margin: 0;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-      animation: fadeInTitle 1.5s ease-in-out;
     }
 
     .sub-title {
@@ -50,27 +49,17 @@
       text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    @keyframes fadeInTitle {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     /* Search Bar */
     .search-container {
       text-align: center;
       margin: 20px auto;
+      padding: 0 15px; /* Added padding for mobile responsiveness */
       position: relative;
-      max-width: 500px;
     }
 
     .search-bar {
       width: 100%;
+      max-width: 500px; /* Ensures the bar doesn’t get too wide */
       padding: 15px 20px;
       font-size: 16px;
       border: 2px solid #0072ff;
@@ -144,16 +133,6 @@
       font-weight: bold;
       color: #0072ff;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
     }
   </style>
 </head>
@@ -220,7 +199,126 @@
         Shariar
         <div class="label">Student</div>
       </div>
-      <!-- Add more students as needed -->
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Supto
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Shuvo
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Ayon
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Jubayer
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Turab
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Abir
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Neon
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Shihab
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Sakin
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Ibrahim
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Fahim
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Junayed
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Toufik
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Mashrif
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Maheraj
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Sajid
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Talha
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Redawan
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Rafi
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Araf
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Sayed
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Anik
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Towhid
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Tasfik
+        <div class="label">Student</div>
+      </div>
     </div>
   </div>
 
@@ -228,14 +326,16 @@
   <div class="footer">Happy Class Party 2024!</div>
 
   <script>
+    // Filter functionality for search bar
     function filterNames() {
-      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-      const teacherNames = document.querySelectorAll('#teacherContainer .name-box');
-      const studentNames = document.querySelectorAll('#studentContainer .name-box');
-
-      [...teacherNames, ...studentNames].forEach((box) => {
-        const name = box.textContent.toLowerCase();
-        box.style.display = name.includes(searchQuery) ? 'flex' : 'none';
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const containers = document.querySelectorAll(".container");
+      containers.forEach(container => {
+        const boxes = container.querySelectorAll(".name-box");
+        boxes.forEach(box => {
+          const text = box.textContent.toLowerCase();
+          box.style.display = text.includes(input) ? "flex" : "none";
+        });
       });
     }
   </script>
