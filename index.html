@@ -13,6 +13,8 @@
       background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       color: #333;
       animation: fadeIn 2s ease;
+      overflow-x: hidden;
+      scroll-behavior: smooth; /* Added scrolling effect */
     }
 
     @keyframes fadeIn {
@@ -62,7 +64,7 @@
     /* Container Layout */
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Smaller boxes */
       gap: 20px;
       padding: 20px;
       max-width: 1000px;
@@ -72,11 +74,11 @@
     /* Box Styles */
     .name-box {
       background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+      border-radius: 10px; /* Reduced border radius */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px; /* Reduced padding for smaller boxes */
       text-align: center;
-      font-size: 18px;
+      font-size: 16px; /* Smaller font size */
       font-weight: 600;
       color: #333;
       cursor: pointer;
@@ -93,7 +95,7 @@
     }
 
     .icon {
-      font-size: 40px;
+      font-size: 35px; /* Smaller icon size */
       margin-bottom: 10px;
       transition: transform 0.3s ease;
       color: #0072ff;
@@ -114,9 +116,9 @@
     .teacher-box {
       background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
       border: 3px solid #4facfe;
-      border-radius: 20px 5px 20px 5px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 15px 5px 15px 5px;
+      padding: 15px; /* Smaller padding */
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
       transition: transform 0.4s ease, background 0.4s ease;
     }
 
@@ -275,4 +277,4 @@
   <!-- Footer Message -->
   <div class="footer">Happy Class Party 2024!</div>
 </body>
-</html>
+        </html>
