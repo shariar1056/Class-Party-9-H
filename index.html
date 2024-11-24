@@ -14,7 +14,7 @@
       color: #333;
       animation: fadeIn 2s ease;
       overflow-x: hidden;
-      scroll-behavior: smooth; /* Added scrolling effect */
+      scroll-behavior: smooth;
     }
 
     @keyframes fadeIn {
@@ -61,10 +61,34 @@
       }
     }
 
+    /* Search Bar */
+    .search-container {
+      text-align: center;
+      margin: 20px auto;
+      position: relative;
+      max-width: 500px;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 2px solid #0072ff;
+      border-radius: 30px;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      box-shadow: 0 0 15px #0072ff;
+      border-color: #00c6ff;
+    }
+
     /* Container Layout */
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Smaller boxes */
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 20px;
       padding: 20px;
       max-width: 1000px;
@@ -74,11 +98,11 @@
     /* Box Styles */
     .name-box {
       background: #fff;
-      border-radius: 10px; /* Reduced border radius */
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 15px; /* Reduced padding for smaller boxes */
+      padding: 15px;
       text-align: center;
-      font-size: 16px; /* Smaller font size */
+      font-size: 16px;
       font-weight: 600;
       color: #333;
       cursor: pointer;
@@ -95,7 +119,7 @@
     }
 
     .icon {
-      font-size: 35px; /* Smaller icon size */
+      font-size: 35px;
       margin-bottom: 10px;
       transition: transform 0.3s ease;
       color: #0072ff;
@@ -110,22 +134,6 @@
       font-size: 14px;
       color: #666;
       margin-top: 5px;
-    }
-
-    /* Teacher Box Enhanced Styling */
-    .teacher-box {
-      background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
-      border: 3px solid #4facfe;
-      border-radius: 15px 5px 15px 5px;
-      padding: 15px; /* Smaller padding */
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.4s ease, background 0.4s ease;
-    }
-
-    .teacher-box:hover {
-      transform: scale(1.1);
-      background: linear-gradient(135deg, #0072ff, #00f2fe);
-      color: white;
     }
 
     /* Footer Animation */
@@ -156,33 +164,44 @@
     <div class="sub-title">Section H</div>
   </div>
 
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-bar"
+      id="searchInput"
+      placeholder="Search teachers or students..."
+      onkeyup="filterNames()"
+    />
+  </div>
+
   <!-- Teachers Section -->
   <div class="teacher-section">
     <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
       Teachers
     </div>
-    <div class="container">
-      <div class="name-box teacher-box">
+    <div class="container" id="teacherContainer">
+      <div class="name-box">
         <div class="icon">👨‍🏫</div>
         Sadman Anik
         <div class="label">Teacher</div>
       </div>
-      <div class="name-box teacher-box">
+      <div class="name-box">
         <div class="icon">👨‍🏫</div>
         Hanif
         <div class="label">Teacher</div>
       </div>
-      <div class="name-box teacher-box">
+      <div class="name-box">
         <div class="icon">👨‍🏫</div>
         Mofazzel
         <div class="label">Teacher</div>
       </div>
-      <div class="name-box teacher-box">
+      <div class="name-box">
         <div class="icon">👨‍🏫</div>
         Azad
         <div class="label">Teacher</div>
       </div>
-      <div class="name-box teacher-box">
+      <div class="name-box">
         <div class="icon">👨‍🏫</div>
         Shohid
         <div class="label">Teacher</div>
@@ -195,86 +214,30 @@
     <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
       Students
     </div>
-    <div class="container">
+    <div class="container" id="studentContainer">
       <div class="name-box">
         <div class="icon">🎓</div>
         Shariar
         <div class="label">Student</div>
       </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Supto
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Shuvo
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Ayon
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Jubayer
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Turab
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Abir
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Neon
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Shihab
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Sakin
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Ibrahim
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Fahim
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Junayed
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Toufik
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Mashrif
-        <div class="label">Student</div>
-      </div>
+      <!-- Add more students as needed -->
     </div>
   </div>
 
   <!-- Footer Message -->
   <div class="footer">Happy Class Party 2024!</div>
+
+  <script>
+    function filterNames() {
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const teacherNames = document.querySelectorAll('#teacherContainer .name-box');
+      const studentNames = document.querySelectorAll('#studentContainer .name-box');
+
+      [...teacherNames, ...studentNames].forEach((box) => {
+        const name = box.textContent.toLowerCase();
+        box.style.display = name.includes(searchQuery) ? 'flex' : 'none';
+      });
+    }
+  </script>
 </body>
-        </html>
+</html>
