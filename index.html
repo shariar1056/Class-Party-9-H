@@ -3,66 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Party 2024</title>
+  <title>Class Party</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #eef2f3, #8e9eab);
-      overflow-x: hidden;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      animation: fadeIn 2s ease;
     }
 
-    /* Confetti Background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://i.imgur.com/z5OaHjh.png') repeat;
-      opacity: 0.2;
-      z-index: -1;
-      animation: confettiMove 10s linear infinite;
-    }
-
-    @keyframes confettiMove {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 300px 300px;
-      }
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      padding: 20px 10px;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .header h1 {
-      font-size: 3rem;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .header h2 {
-      font-size: 1.5rem;
-      margin: 10px 0;
-      font-weight: 400;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
+    /* Animation for Body Fade In */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -72,84 +25,115 @@
       }
     }
 
-    /* Section Container */
-    .section {
-      padding: 40px 20px;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: slideUp 1.5s ease-in-out forwards;
+    /* Title Section */
+    .title-section {
+      text-align: center;
+      padding: 20px 0;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .section:nth-child(even) {
-      background: #f9f9f9;
+    .main-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 0;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      animation: fadeInTitle 1.5s ease-in-out;
     }
 
-    @keyframes slideUp {
+    .sub-title {
+      font-size: 24px;
+      margin: 10px 0 0;
+      font-weight: 600;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeInTitle {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* Container */
+    /* Container Layout */
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
+      padding: 20px;
+      max-width: 900px;
+      margin: 20px auto;
     }
 
-    /* Card Style */
-    .card {
+    /* Box Styles */
+    .name-box {
       background: #fff;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       padding: 20px;
       text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
       cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    .name-box:hover {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      transform: scale(1.05);
     }
 
-    .card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      object-fit: cover;
+    .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+      color: #0072ff;
     }
 
-    .card h3 {
-      font-size: 1.2rem;
-      margin: 5px 0;
-      color: #333;
+    .name-box:hover .icon {
+      transform: scale(1.2);
+      color: #fff;
     }
 
-    .card p {
-      font-size: 0.9rem;
-      color: #777;
+    .label {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
     }
 
-    .card:hover h3 {
-      color: #ff758c;
+    /* Teacher Box Enhanced Styling */
+    .teacher-box {
+      background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
+      border: 3px solid #4facfe;
+      border-radius: 20px 5px 20px 5px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s ease, background 0.4s ease;
     }
 
-    /* Footer */
+    .teacher-box:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #0072ff, #00f2fe);
+      color: white;
+    }
+
+    /* Footer Animation */
     .footer {
       text-align: center;
-      padding: 20px 0;
-      font-size: 1.5rem;
+      margin: 40px 0 20px;
+      font-size: 32px;
       font-weight: bold;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      color: white;
+      color: #0072ff;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
       animation: bounce 2s infinite;
     }
@@ -159,64 +143,102 @@
         transform: translateY(0);
       }
       50% {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <div class="header">
-    <h1>Class Party 2024</h1>
-    <h2>Section H</h2>
+  <!-- Title Section -->
+  <div class="title-section">
+    <div class="main-title">CLASS PARTY</div>
+    <div class="sub-title">Section H</div>
   </div>
 
   <!-- Teachers Section -->
-  <div class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">Teachers</h2>
+  <div class="teacher-section">
+    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
+      Teachers
+    </div>
     <div class="container">
-      <div class="card">
-        <img src="https://via.placeholder.com/100" alt="Teacher 1">
-        <h3>Sadman Anik</h3>
-        <p>Teacher</p>
+      <div class="name-box teacher-box">
+        <div class="icon">👨‍🏫</div>
+        Sadman Anik
+        <div class="label">Teacher</div>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/100" alt="Teacher 2">
-        <h3>Hanif</h3>
-        <p>Teacher</p>
+      <div class="name-box teacher-box">
+        <div class="icon">👨‍🏫</div>
+        Hanif
+        <div class="label">Teacher</div>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/100" alt="Teacher 3">
-        <h3>Mofazzel</h3>
-        <p>Teacher</p>
+      <div class="name-box teacher-box">
+        <div class="icon">👨‍🏫</div>
+        Mofazzel
+        <div class="label">Teacher</div>
       </div>
     </div>
   </div>
 
   <!-- Students Section -->
-  <div class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">Students</h2>
+  <div class="student-section">
+    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
+      Students
+    </div>
     <div class="container">
-      <!-- Add students dynamically -->
-      <script>
-        const students = ['Shariar', 'Supto', 'Shuvo', 'Ayon', 'Jubayer', 'Turab', 'Abir', 'Neon', 'Shihab', 'Sakin'];
-        const container = document.querySelector('.container:last-child');
-
-        students.forEach((name) => {
-          const card = document.createElement('div');
-          card.classList.add('card');
-          card.innerHTML = `
-            <img src="https://via.placeholder.com/100" alt="${name}">
-            <h3>${name}</h3>
-            <p>Student</p>
-          `;
-          container.appendChild(card);
-        });
-      </script>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Shariar
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Supto
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Shuvo
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Ayon
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Jubayer
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Turab
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Abir
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Neon
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Shihab
+        <div class="label">Student</div>
+      </div>
+      <div class="name-box">
+        <div class="icon">🎓</div>
+        Sakin
+        <div class="label">Student</div>
+      </div>
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer Message -->
   <div class="footer">Happy Class Party 2024!</div>
 </body>
 </html>
