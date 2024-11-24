@@ -12,26 +12,43 @@
       padding: 0;
       background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       color: #333;
-      animation: fadeIn 2s ease;
+      overflow-x: hidden;
     }
 
-    /* Animation for Body Fade In */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
+    /* Confetti Background Animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/z5OaHjh.png') repeat;
+      opacity: 0.3;
+      z-index: -1;
+      animation: moveConfetti 10s linear infinite;
+    }
+
+    @keyframes moveConfetti {
+      0% {
+        background-position: 0 0;
       }
-      to {
-        opacity: 1;
+      100% {
+        background-position: 200px 200px;
       }
     }
 
     /* Title Section */
     .title-section {
       text-align: center;
-      padding: 20px 0;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
+      padding: 30px 0;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
       color: white;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: slideIn 1.5s ease-in-out;
     }
 
     .main-title {
@@ -39,7 +56,6 @@
       font-weight: bold;
       margin: 0;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-      animation: fadeInTitle 1.5s ease-in-out;
     }
 
     .sub-title {
@@ -49,7 +65,7 @@
       text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    @keyframes fadeInTitle {
+    @keyframes slideIn {
       from {
         opacity: 0;
         transform: translateY(-20px);
@@ -60,17 +76,34 @@
       }
     }
 
-    /* Container Layout */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 20px;
-      max-width: 900px;
-      margin: 20px auto;
+    /* Sections with Scroll Effects */
+    .section {
+      padding: 40px 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeUp 1.5s ease-in-out forwards;
     }
 
-    /* Box Styles */
+    .section:nth-child(even) {
+      background: #fdfdfd;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Name Boxes */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     .name-box {
       background: #fff;
       border-radius: 15px;
@@ -88,7 +121,7 @@
     }
 
     .name-box:hover {
-      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
       color: white;
       transform: scale(1.05);
     }
@@ -97,24 +130,17 @@
       font-size: 40px;
       margin-bottom: 10px;
       transition: transform 0.3s ease;
-      color: #0072ff;
+      color: #ff758c;
     }
 
     .name-box:hover .icon {
       transform: scale(1.2);
-      color: #fff;
     }
 
-    .label {
-      font-size: 14px;
-      color: #666;
-      margin-top: 5px;
-    }
-
-    /* Teacher Box Enhanced Styling */
+    /* Teacher Box */
     .teacher-box {
+      border: 3px solid #ff758c;
       background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
-      border: 3px solid #4facfe;
       border-radius: 20px 5px 20px 5px;
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -123,17 +149,18 @@
 
     .teacher-box:hover {
       transform: scale(1.1);
-      background: linear-gradient(135deg, #0072ff, #00f2fe);
+      background: linear-gradient(135deg, #ffe6f7, #ff758c);
       color: white;
     }
 
-    /* Footer Animation */
+    /* Footer */
     .footer {
       text-align: center;
-      margin: 40px 0 20px;
-      font-size: 32px;
+      padding: 20px 0;
+      font-size: 24px;
       font-weight: bold;
-      color: #0072ff;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
       animation: bounce 2s infinite;
     }
@@ -156,8 +183,8 @@
   </div>
 
   <!-- Teachers Section -->
-  <div class="teacher-section">
-    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
+  <div class="section">
+    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px;">
       Teachers
     </div>
     <div class="container">
@@ -180,8 +207,8 @@
   </div>
 
   <!-- Students Section -->
-  <div class="student-section">
-    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333;">
+  <div class="section">
+    <div class="section-title" style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px;">
       Students
     </div>
     <div class="container">
@@ -238,7 +265,20 @@
     </div>
   </div>
 
-  <!-- Footer Message -->
+  <!-- Footer Section -->
   <div class="footer">Happy Class Party 2024!</div>
+
+  <!-- Smooth Scrolling Script -->
+  <script>
+    document.addEventListener('scroll', function () {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach((section) => {const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      });
+    });
+  </script>
 </body>
-  </html>
+</html>
