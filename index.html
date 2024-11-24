@@ -49,19 +49,34 @@
       text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     }
 
+    /* SH SHARIAR Link */
+    .top-link {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0072ff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .top-link:hover {
+      color: #0056cc;
+    }
+
     /* Search Bar */
     .search-container {
       text-align: center;
       margin: 20px auto;
-      padding: 0 15px; /* Added padding for mobile responsiveness */
+      padding: 0 15px;
       position: relative;
     }
 
     .search-bar {
       width: 100%;
-      max-width: 500px; /* Ensures the bar doesn’t get too wide */
-      padding: 15px 20px;
-      font-size: 16px;
+      max-width: 350px;
+      padding: 12px 15px;
+      font-size: 14px;
       border: 2px solid #0072ff;
       border-radius: 30px;
       outline: none;
@@ -79,9 +94,25 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 20px;
+      max-height: 400px;
+      overflow-y: auto;
       padding: 20px;
       max-width: 1000px;
       margin: 20px auto;
+      scroll-behavior: smooth;
+    }
+
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+      background: #0072ff;
+      border-radius: 5px;
+    }
+
+    .container::-webkit-scrollbar-thumb:hover {
+      background: #0056cc;
     }
 
     /* Box Styles */
@@ -143,6 +174,9 @@
     <div class="sub-title">Section H</div>
   </div>
 
+  <!-- SH SHARIAR Link -->
+  <div class="top-link" onclick="openLink()">SH SHARIAR</div>
+
   <!-- Search Bar -->
   <div class="search-container">
     <input
@@ -160,31 +194,11 @@
       Teachers
     </div>
     <div class="container" id="teacherContainer">
-      <div class="name-box">
-        <div class="icon">👨‍🏫</div>
-        Sadman Anik
-        <div class="label">Teacher</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">👨‍🏫</div>
-        Hanif
-        <div class="label">Teacher</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">👨‍🏫</div>
-        Mofazzel
-        <div class="label">Teacher</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">👨‍🏫</div>
-        Azad
-        <div class="label">Teacher</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">👨‍🏫</div>
-        Shohid
-        <div class="label">Teacher</div>
-      </div>
+      <div class="name-box"><div class="icon">👨‍🏫</div>Sadman Anik<div class="label">Teacher</div></div>
+      <div class="name-box"><div class="icon">👨‍🏫</div>Hanif<div class="label">Teacher</div></div>
+      <div class="name-box"><div class="icon">👨‍🏫</div>Mofazzel<div class="label">Teacher</div></div>
+      <div class="name-box"><div class="icon">👨‍🏫</div>Azad<div class="label">Teacher</div></div>
+      <div class="name-box"><div class="icon">👨‍🏫</div>Shohid<div class="label">Teacher</div></div>
     </div>
   </div>
 
@@ -194,149 +208,52 @@
       Students
     </div>
     <div class="container" id="studentContainer">
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Shariar
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Supto
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Shuvo
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Ayon
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Jubayer
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Turab
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Abir
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Neon
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Shihab
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Sakin
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Ibrahim
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Fahim
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Junayed
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Toufik
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Mashrif
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Maheraj
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Sajid
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Talha
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Redawan
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Rafi
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Araf
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Sayed
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Anik
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Towhid
-        <div class="label">Student</div>
-      </div>
-      <div class="name-box">
-        <div class="icon">🎓</div>
-        Tasfik
-        <div class="label">Student</div>
-      </div>
+      <div class="name-box"><div class="icon">🎓</div>Shariar<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Supto<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Shuvo<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Ayon<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Jubayer<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Turab<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Abir<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Neon<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Ovi<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Mehedi<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Shagor<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Tanim<div class="label">Student</div></div>
+      <div class="name-box"><div class="icon">🎓</div>Naim<div class="label">Student</div></div>
     </div>
   </div>
 
-  <!-- Footer Message -->
-  <div class="footer">Happy Class Party 2024!</div>
+  <!-- Footer -->
+  <div class="footer">End of List</div>
 
+  <!-- JavaScript -->
   <script>
-    // Filter functionality for search bar
+    // Open Link Function
+    function openLink() {
+      window.open("http://t.me/genarel_admin", "_blank");
+    }
+
+    // Search Filter Function
     function filterNames() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const containers = document.querySelectorAll(".container");
-      containers.forEach(container => {
-        const boxes = container.querySelectorAll(".name-box");
-        boxes.forEach(box => {
-          const text = box.textContent.toLowerCase();
-          box.style.display = text.includes(input) ? "flex" : "none";
+      const searchInput = document.getElementById("searchInput").value.toLowerCase();
+      const teacherContainer = document.getElementById("teacherContainer");
+      const studentContainer = document.getElementById("studentContainer");
+
+      const filterBoxes = (container) => {
+        const boxes = container.getElementsByClassName("name-box");
+        Array.from(boxes).forEach((box) => {
+          const name = box.textContent.toLowerCase();
+          if (name.includes(searchInput)) {
+            box.style.display = "flex";
+          } else {
+            box.style.display = "none";
+          }
         });
-      });
+      };
+
+      filterBoxes(teacherContainer);
+      filterBoxes(studentContainer);
     }
   </script>
 </body>
