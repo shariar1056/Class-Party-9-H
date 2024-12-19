@@ -13,7 +13,6 @@
             color: #fff;
         }
 
-        /* Center alignment for content */
         .center {
             display: flex;
             justify-content: center;
@@ -39,7 +38,6 @@
             transform: scale(1.1);
         }
 
-        /* Home Screen */
         #home-screen {
             display: flex;
             flex-direction: column;
@@ -65,7 +63,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Game Screen */
         #game-screen {
             display: none;
             position: relative;
@@ -125,7 +122,11 @@
             transition: transform 0.1s ease-in-out;
         }
 
-        /* Smoke Effect */
+        .enemy2 {
+            background-color: rgba(255, 0, 0, 0.7); /* Red Effect */
+            border: 3px solid red;
+        }
+
         .smoke {
             position: absolute;
             width: 100px;
@@ -145,19 +146,57 @@
                 opacity: 0;
             }
         }
+
+        .death-effect {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            animation: deathEffect 0.5s forwards;
+        }
+
+        @keyframes deathEffect {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .difficulty-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <!-- Home Screen -->
     <div id="home-screen">
         <h1>CAPYBARA</h1>
         <div class="stats-box">
             <p><strong>Total Points:</strong> <span id="total-points">0</span></p>
         </div>
-        <button class="button" onclick="startGame()">Start Game</button>
+        <button class="button" onclick="showDifficultyPopup()">Start Game</button>
     </div>
 
-    <!-- Game Screen -->
+    <div id="difficulty-popup" class="difficulty-popup">
+        <h2>Choose Difficulty</h2>
+        <button class="button" onclick="startGame('normal')">Normal</button>
+        <button class="button" onclick="startGame('hard')">Hard</button>
+        <button class="button" onclick="startGame('insane')">Insane</button>
+    </div>
+
     <div id="game-screen">
         <div id="scoreboard">Score: <span id="score">0</span></div>
         <div id="timer">Time: <span id="time">60</span>s</div>
@@ -177,15 +216,24 @@
         const popup = document.getElementById('popup');
         const finalScore = document.getElementById('final-score');
         const totalPointsDisplay = document.getElementById('total-points');
+        const difficultyPopup = document.getElementById('difficulty-popup');
         let score = 0;
         let time = 60;
         let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
         totalPointsDisplay.textContent = totalPoints;
 
-        const monsterImage1 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F1734539756729.png1734539756729.png?alt=media&token=fec5a763-2cee-4e52-810d-e1230d33c247'; // Monster Image 1
-        const monsterImage2 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F20241218_221533.png20241218_221533.png?alt=media&token=c31ea5e8-82c9-45cf-8c92-631790fe39e5'; // Monster Image 2
+        const monsterImage1 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F1734539756729.png1734539756729.png?alt=media&token=fec5a763-2cee-4e52-810d-e1230d33c247';
+        const monsterImage2 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F20241218_221533.png20241218_221533.png?alt=media&token=c31ea5e8-82c9-45cf-8c92-631790fe39e5';
+        let difficulty = 'normal';
 
-        function startGame() {
+        function showDifficultyPopup() {
+            homeScreen.style.display = 'none';
+            difficultyPopup.style.display = 'block';
+        }
+
+        function startGame(selectedDifficulty) {
+            difficulty = selectedDifficulty;
+            difficultyPopup.style.display = 'none';
             homeScreen.style.display = 'none';
             gameScreen.style.display = 'block';
             score = 0;
@@ -215,40 +263,44 @@
                 } else {
                     createEnemy();
                 }
-            }, 1000);
+            }, difficulty === 'normal' ? 1500 : difficulty === 'hard' ? 1000 : 700);
         }
 
         function createEnemy() {
             const enemy = document.createElement('div');
-            const isSpecialEnemy = Math.random() < 0.3; // 30% chance of special enemy
+            const isSpecialEnemy = Math.random() < 0.3;
             const monsterImage = isSpecialEnemy ? monsterImage2 : monsterImage1;
 
             enemy.classList.add('enemy');
             enemy.style.backgroundImage = `url(${monsterImage})`;
-            enemy.style.top = `${Math.random() * 80}vh`;
-            enemy.style.left = `${Math.random() * 80}vw`;
+            enemy.style.top = `${Math.random() * 70}vh`;
+            enemy.style.left = `${Math.random() * 70}vw`;
+
+            if (isSpecialEnemy) {
+                enemy.classList.add('enemy2');
+            }
 
             gameScreen.appendChild(enemy);
 
-            // Add click functionality
+            let tapCount = 0;
+
             enemy.addEventListener('click', () => {
+                tapCount++;
+
                 if (isSpecialEnemy) {
-                    score += 3; // Special Monster gives 3 points
+                    if (tapCount >= 3) {
+                        score += 5;
+                        enemy.remove();
+                        createDeathEffect(enemy);
+                    }
                 } else {
-                    score++; // Regular Monster gives 1 point
+                    score++;
+                    enemy.remove();
+                    createDeathEffect(enemy);
                 }
+
                 scoreBoard.textContent = score;
-                enemy.remove();
-
-                // Add Smoke Effect
-                createSmokeEffect(enemy);
-
-                // Vibration and Click Effects
                 triggerVibration();
-                enemy.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    enemy.style.transform = 'scale(1)';
-                }, 100);
             });
 
             setTimeout(() => {
@@ -258,24 +310,24 @@
             }, 4000);
         }
 
-        function createSmokeEffect(enemy) {
-            const smoke = document.createElement('div');
-            smoke.classList.add('smoke');
-            smoke.style.top = `${enemy.offsetTop - 50}px`;
-            smoke.style.left = `${enemy.offsetLeft - 50}px`;
+        function createDeathEffect(enemy) {
+            const deathEffect = document.createElement('div');
+            deathEffect.classList.add('death-effect');
+            deathEffect.style.top = `${enemy.offsetTop}px`;
+            deathEffect.style.left = `${enemy.offsetLeft}px`;
 
-            gameScreen.appendChild(smoke);
+            gameScreen.appendChild(deathEffect);
 
             setTimeout(() => {
-                if (smoke.parentNode) {
-                    smoke.remove();
+                if (deathEffect.parentNode) {
+                    deathEffect.remove();
                 }
             }, 500);
         }
 
         function triggerVibration() {
             if (navigator.vibrate) {
-                navigator.vibrate(100); // Vibrates for 100 milliseconds
+                navigator.vibrate(100);
             }
         }
 
@@ -289,7 +341,7 @@
 
         function restartGame() {
             popup.style.display = 'none';
-            startGame();
+            startGame(difficulty);
         }
 
         function goToHome() {
@@ -299,4 +351,4 @@
         }
     </script>
 </body>
-</html>ml>
+</html>
