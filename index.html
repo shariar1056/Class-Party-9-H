@@ -3,49 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adsgram Reward Ads</title>
-    <script src="https://cdn.adsgram.com/sdk.js"></script> <!-- Adsgram SDK -->
+    <title>CAPYBARA X IBRAHIM</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #121212;
+            color: #fff;
+        }
+
+        /* Center alignment for content */
+        .center {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
+            flex-direction: column;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
+
+        .button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Home Screen */
+        #home-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #292d3e;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #home-screen h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: #ff9800;
+        }
+
+        .stats-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Game Screen */
+        #game-screen {
+            display: none;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #121212;
+            overflow: hidden;
+        }
+
+        #scoreboard, #timer {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #fff;
+        }
+
+        #scoreboard {
+            top: 20px;
+            left: 20px;
+        }
+
+        #timer {
+            top: 20px;
+            right: 20px;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            background: #333;
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #popup h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .enemy {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-size: cover;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        /* Smoke Effect */
+        .smoke {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            animation: smokeEffect 0.5s forwards;
+        }
+
+        @keyframes smokeEffect {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <button id="showAd">Show Reward Ad</button>
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <h1>CAPYBARA</h1>
+        <div class="stats-box">
+            <p><strong>Total Points:</strong> <span id="total-points">0</span></p>
+        </div>
+        <button class="button" onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen">
+        <div id="scoreboard">Score: <span id="score">0</span></div>
+        <div id="timer">Time: <span id="time">60</span>s</div>
+        <div id="popup">
+            <h2>Game Over!</h2>
+            <p>Your Score: <span id="final-score">0</span></p>
+            <button class="button" onclick="restartGame()">Restart</button>
+            <button class="button" onclick="goToHome()">Home</button>
+        </div>
+    </div>
 
     <script>
-        // Initialize Adsgram SDK
-        const adsgram = new Adsgram();
+        const homeScreen = document.getElementById('home-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const scoreBoard = document.getElementById('score');
+        const timerDisplay = document.getElementById('time');
+        const popup = document.getElementById('popup');
+        const finalScore = document.getElementById('final-score');
+        const totalPointsDisplay = document.getElementById('total-points');
+        let score = 0;
+        let time = 60;
+        let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
+        totalPointsDisplay.textContent = totalPoints;
 
-        // Add event listener to the button
-        document.getElementById('showAd').addEventListener('click', () => {
-            adsgram.showRewardAd('6301')
-                .then(() => {
-                    alert('Ad completed! Thank you.');
-                })
-                .catch(err => {
-                    alert('Ad failed to load: ' + err.message);
-                });
-        });
+        const monsterImage1 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F1734539756729.png1734539756729.png?alt=media&token=fec5a763-2cee-4e52-810d-e1230d33c247'; // Monster Image 1
+        const monsterImage2 = 'https://firebasestorage.googleapis.com/v0/b/cash-56e18.appspot.com/o/icon%2F20241218_221533.png20241218_221533.png?alt=media&token=c31ea5e8-82c9-45cf-8c92-631790fe39e5'; // Monster Image 2
+
+        function startGame() {
+            homeScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+            score = 0;
+            time = 60;
+            scoreBoard.textContent = score;
+            timerDisplay.textContent = time;
+
+            startTimer();
+            spawnEnemies();
+        }
+
+        function startTimer() {
+            const timerInterval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function spawnEnemies() {
+            const spawnInterval = setInterval(() => {
+                if (time <= 0) {
+                    clearInterval(spawnInterval);
+                } else {
+                    createEnemy();
+                }
+            }, 1000);
+        }
+
+        function createEnemy() {
+            const enemy = document.createElement('div');
+            const isSpecialEnemy = Math.random() < 0.3; // 30% chance of special enemy
+            const monsterImage = isSpecialEnemy ? monsterImage2 : monsterImage1;
+
+            enemy.classList.add('enemy');
+            enemy.style.backgroundImage = `url(${monsterImage})`;
+            enemy.style.top = `${Math.random() * 80}vh`;
+            enemy.style.left = `${Math.random() * 80}vw`;
+
+            gameScreen.appendChild(enemy);
+
+            // Add click functionality
+            enemy.addEventListener('click', () => {
+                if (isSpecialEnemy) {
+                    score += 3; // Special Monster gives 3 points
+                } else {
+                    score++; // Regular Monster gives 1 point
+                }
+                scoreBoard.textContent = score;
+                enemy.remove();
+
+                // Add Smoke Effect
+                createSmokeEffect(enemy);
+
+                // Vibration and Click Effects
+                triggerVibration();
+                enemy.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    enemy.style.transform = 'scale(1)';
+                }, 100);
+            });
+
+            setTimeout(() => {
+                if (enemy.parentNode) {
+                    enemy.remove();
+                }
+            }, 4000);
+        }
+
+        function createSmokeEffect(enemy) {
+            const smoke = document.createElement('div');
+            smoke.classList.add('smoke');
+            smoke.style.top = `${enemy.offsetTop - 50}px`;
+            smoke.style.left = `${enemy.offsetLeft - 50}px`;
+
+            gameScreen.appendChild(smoke);
+
+            setTimeout(() => {
+                if (smoke.parentNode) {
+                    smoke.remove();
+                }
+            }, 500);
+        }
+
+        function triggerVibration() {
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // Vibrates for 100 milliseconds
+            }
+        }
+
+        function endGame() {
+            finalScore.textContent = score;
+            totalPoints += score;
+            localStorage.setItem('totalPoints', totalPoints);
+            totalPointsDisplay.textContent = totalPoints;
+            popup.style.display = 'block';
+        }
+
+        function restartGame() {
+            popup.style.display = 'none';
+            startGame();
+        }
+
+        function goToHome() {
+            popup.style.display = 'none';
+            gameScreen.style.display = 'none';
+            homeScreen.style.display = 'flex';
+        }
     </script>
 </body>
-</html>
+</html>ml>
